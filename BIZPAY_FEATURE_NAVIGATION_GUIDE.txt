@@ -1,0 +1,861 @@
+BizPay – Feature Navigation & Demo Guide
+Version: 3.0 (Surface Area Freeze — Certified)
+Last Updated: February 18,2026
+System Type: Frontend Application with Structured Data
+Total Screens: 70+ across 14 modules
+
+═══════════════════════════════════════════════════════════
+  SURFACE AREA FREEZE — EFFECTIVE IMMEDIATELY
+═══════════════════════════════════════════════════════════
+  The following are LOCKED and require explicit architectural
+  approval before any modification:
+
+  1. Tab Structure — DockGrid layout, tile IDs, tile order
+  2. Feature Names — All labels visible in DockGrid, CollectHub,
+     CommandSearch, and navigation menus
+  3. Feature Placement — Which module each screen belongs to
+  4. Copy Tone — System language style (neutral, professional,
+     no demo/mock/placeholder/coming-soon phrasing)
+  5. Component Architecture — FeatureOverviewScreen, DemoDisclaimer,
+     CommandSearch entry format
+
+  Rule: No new screen, label, or navigation entry without
+  explicit architectural approval.
+════════════════════════════════��══════════════════════════
+
+🎯 GUIDE PURPOSE
+This document provides complete navigation instructions for presenting BizPay's enterprise SME banking features to stakeholders. Use this guide to:
+
+Navigate all 70+ screens without confusion
+Execute role-specific demo scenarios
+Access features via multiple pathways (DockGrid, Search, Menus)
+Explain the purpose of each feature clearly
+Recover quickly if you get lost during presentations
+Critical Context: BizPay is a frontend-only demonstration system using mock data. All transactions, approvals, and workflows are simulated for visual demonstration. No real banking operations occur.
+
+1️⃣ APP STRUCTURE MAP
+TOPBAR CONTROLS
+┌─────────────────────────────────────────────────────────┐
+│ 🔍 Command Search (⌘K / Ctrl+K) → Universal access     │
+│ 🔔 Notifications Bell → Approval & system alerts       │
+│ 👤 Profile Menu → Role switch, Settings access         │
+│ 🎚️  Floating Role Switcher → Quick role changes        │
+└─────────────────────────────────────────────────────────┘
+DASHBOARD (HOME)
+Account Balance Cards → Current account status
+Quick Actions → Shortcut to Transactions
+Home Tabs → Accounts, FDR/DPS, Credit Card, Loans
+DOCKGRID (14 PRIMARY MODULES)
+🏠 HOME
+   └─ Dashboard with account overview
+
+💸 TRANSACTIONS
+   ├─ MFS Transfer (bKash, Nagad, Rocket, SureCash, Upay)
+   ├─ Own Account Transfer (Single / Bulk)
+   ├─ Third Party Transfer
+   ├─ Direct Debit (Own / Third Party, Single / Bulk)
+   └─ Bill Payment (Electricity, Gas, WASA, Govt)
+
+🔄 SERVICES
+   ├─ Positive Pay (Cheque clearance control)
+   ├─ Chequebook Inventory
+   ├─ Service Requests (Banking services)
+   └─ User Management (Access via Service Requests)
+
+✅ APPROVALS
+   ├─ Approval Queue (Pending / History)
+   └─ Approval Detail View (Transaction specifics)
+
+📊 RECONCILIATION
+   ├─ Reconciliation Dashboard (Auto-matching)
+   ├─ Exception Management (Unmatched items)
+   ├─ Manual Matching (Edge cases)
+   └─ Auto-Reconciliation Rules (Config)
+
+📈 LIMITS
+   ├─ Transaction Limits (Role-based thresholds)
+   ├─ Escalation Rules (Auto-routing logic)
+   ├─ Limit Breach History (Violations log)
+   └─ Transaction Pre-Check (Validate before submit)
+
+👥 BENEFICIARY
+   ├─ Manage Beneficiaries (List / Edit / Delete)
+   ├─ Add BRAC Bank Beneficiary
+   ├─ Add Other Bank Beneficiary
+   ├─ Positive Pay Beneficiary
+   └─ Beneficiary Governance (Approval / Risk controls)
+
+📄 REPORTS
+   ├─ Generate Statement (Date range export)
+   ├─ Account Summary (Transaction history)
+   ├─ Transaction Reports (Filter by type)
+   ├─ Direct Debit Reports (Mandate tracking)
+   ├─ Positive Pay Reports (Cheque status)
+   ├─ Bill Payment Reports (Utility payments)
+   └─ Invoices Hub
+       ├─ Invoice List (All invoices)
+       ├─ Invoice Detail (Line-item view)
+       ├─ Outstanding Tracker (Aging analysis)
+       └─ Invoice Overview (KPIs)
+
+📅 TIMELINE
+   └─ EMI & Payment Schedule (Calendar view)
+
+🔔 NOTIFICATIONS
+   └─ Notification Center (Approval / System events)
+
+📝 ACTIVITY LOG
+   └─ System Audit Trail (All user actions)
+
+📦 COLLECTIONS
+   ├─ Collections Hub (Central menu)
+   ├─ Virtual Account Management (VAM)
+   ├─ Direct Debit Collection
+   └─ Collection Matching (Receivables recon)
+
+🎯 INSIGHTS
+   ├─ Insights Hub (Intelligence central)
+   ├─ Smart Alerts (Behavioral cash intelligence)
+   ├─ Cash Intelligence (Runway / Safe balance)
+   ├─ Risk Dashboard (Fraud monitoring)
+   ├─ Admin Control Tower (System health)
+   ├─ Timeline View (Schedule view)
+   ├─ Activity Log (Audit trail)
+   ├─ VAM Intelligence (Receivables tracking)
+   └─ Reports & Reconciliation (Data export)
+
+⚙️ SETTINGS
+   ├─ Settings Hub (Config central)
+   ├─ Account Control Tower (Multi-account view)
+   ├─ Cash Buckets (Mental accounting)
+   ├─ Tax Vault (GST/TDS parking) [Search only]
+   └─ Benefits & Incentives (Privilege rewards)
+CASH OS PLACEHOLDER FEATURES (13 Screens)
+Access via Command Search only
+
+💰 COLLECTIONS
+   ├─ Collect Money (QR / Payment Links / VA)
+   └─ Receivables Intelligence (AR Dashboard)
+
+💳 PAYMENTS
+   ├─ Outflow Controls (Scheduled payments)
+   ├─ Payables Intelligence (Optimal pay date)
+   └─ Credit Backstop (OD/CC fallback)
+
+🔄 RECONCILE
+   ├─ Sweep & Park (Auto-sweep rules)
+   └─ Cash Locks (No-debit windows)
+
+🏦 ACCOUNTS
+   ├─ Tax Vault (Statutory parking)
+   └─ Cash Buckets (Purpose-based allocation)
+2️⃣ COMPLETE FEATURE NAVIGATION TABLE
+Feature	Primary Entry	Search Keywords	Purpose	Relevant Roles
+MFS Transfer	DockGrid → Transactions → MFS	mfs, bkash, nagad	Mobile financial service transfers	Maker, Checker
+Own Account Transfer	DockGrid → Transactions → Own Account	own, ownaccount	Internal fund movement	Maker, Checker
+Third Party Transfer	DockGrid → Transactions → Third Party	thirdparty, transfer	External beneficiary payments	Maker, Checker, Approver
+Direct Debit	DockGrid → Transactions → Direct Debit	directdebit, mandate	Auto-pay mandate setup	Maker, Admin
+Bill Payment	DockGrid → Transactions → Bill Pay	bill, utility	Utility bill payments	Maker, Checker
+Approval Queue	DockGrid → Approvals	approvals, approval	Transaction review & approval	Checker, Approver, Admin
+Approval Detail	Approval Queue → Select item	(via queue only)	Transaction-specific approval view	Checker, Approver
+Reconciliation Dashboard	DockGrid → Reconciliation	recon, reconciliation	Auto-matching engine	Admin, Finance
+Exception Management	Reconciliation Dashboard → Exceptions	exceptions, unmatched	Handle reconciliation failures	Admin, Finance
+Manual Matching	Reconciliation Dashboard → Manual	manual, match	Resolve edge case mismatches	Finance
+Transaction Limits	DockGrid → Limits	limits, transactionlimits	Role-based spending controls	Admin, Approver
+Escalation Rules	Limits Hub → Escalation Rules	escalation	Auto-routing to higher authority	Admin
+Limit Breach History	Limits Hub → Breach History	breach, violations	Track limit violations	Admin, Auditor
+Transaction Pre-Check	Limits Hub → Pre-Check	precheck, validate	Validate before submission	Maker, Checker
+Manage Beneficiaries	DockGrid → Beneficiary	beneficiary, payee	Payment recipient management	Maker, Admin
+Add BRAC Beneficiary	Beneficiary Menu → Add BRAC	addbrac	Add internal bank beneficiary	Maker
+Add Other Bank Beneficiary	Beneficiary Menu → Add Other Bank	addbeneficiary	Add external beneficiary	Maker
+Positive Pay Beneficiary	Beneficiary Menu → Positive Pay	positivepaybeneficiary	Cheque-specific beneficiary	Maker
+Beneficiary Governance	Beneficiary Menu → Governance	beneficiarygovernance, beneficiaryrisk	Approval workflows & risk	Admin, Checker
+Generate Statement	DockGrid → Reports → Statement	statement, download	Export account statements	All Roles
+Account Summary	DockGrid → Reports → Summary	accountsummary	View transaction history	All Roles
+Transaction Reports	DockGrid → Reports → Transaction	transactionreports	Filter & export transactions	Finance, Admin
+Direct Debit Reports	DockGrid → Reports → Direct Debit	directdebitreports	Mandate status tracking	Finance
+Positive Pay Reports	DockGrid → Reports → Positive Pay	positivepayreports	Cheque clearance reports	Finance
+Invoice Hub	DockGrid → Reports → Invoices	invoice, invoices	GST invoice tracking	Finance, Admin
+Invoice List	Invoice Hub → List View	(via hub)	View all invoices	Finance
+Invoice Detail	Invoice List → Select invoice	(via list)	Line-item invoice view	Finance
+Outstanding Tracker	Invoice Hub → Outstanding	(via hub)	Receivables aging analysis	Finance, CFO
+Timeline View	DockGrid → Timeline	timeline, emi, schedule	Payment calendar	All Roles
+Notification Center	DockGrid → Notifications or TopBar Bell	notifications	Approval & system alerts	All Roles
+Activity Log	DockGrid → Activity Log	activity, audit	Complete audit trail	Admin, Auditor
+Collections Hub	DockGrid → Collections	collections	Central collections navigation	Finance, Admin
+Virtual Account Mgmt	Collections Hub → VAM	vam	Distributor receivables tracking	Finance, Admin
+Direct Debit Collection	Collections Hub → DD Collection	(via hub)	Mandate-based collections	Finance
+Collection Matching	Collections Hub → Matching	(via hub)	Match inflows to invoices	Finance
+Insights Hub	DockGrid → Insights	insights	Intelligence central navigation	CFO, Admin
+Smart Alerts	Insights Hub → Smart Alerts	smart-alerts, behavioral, cfo insights	Behavioral cash insights	CFO, Finance
+Cash Intelligence	Insights Hub → Cash Intelligence	cash-intelligence, cashrunway	Runway & forecasting	CFO, Finance
+Risk Dashboard	Insights Hub → Risk Dashboard	risk-dashboard, risk, fraud	Fraud monitoring	Admin, Security
+Admin Control Tower	Insights Hub → Admin Control Tower	admin-insight, admininsight	Approval health & system integrity	Admin
+Settings Hub	DockGrid → Settings	settings	Configuration central	Admin
+Account Control Tower	Settings Hub → Account Control Tower	account-control-tower, multiaccountview	Multi-account liquidity view	CFO, Admin
+Cash Buckets	Settings Hub → Cash Buckets	cash-buckets, mentalaccounting	Purpose-based cash allocation	CFO, Finance
+Tax Vault	Search only	tax-vault, gstparking, tdsvault	GST/TDS statutory parking	Finance, Admin
+Benefits & Incentives	Settings Hub → Benefits	benefits-incentives	Balance discipline rewards	Admin, CFO
+User Management	Services → Service Requests → Users	usermanagement, users	User/role management	Admin
+Positive Pay	DockGrid → Services → Positive Pay	positivepay	Cheque clearance control	Finance, Admin
+Chequebook Inventory	DockGrid → Services → Chequebook	cheque, chequebook	Cheque leaf tracking	Finance, Maker
+Collect Money (Placeholder)	Search only	collect, banglaqr, paymentlinks	QR/Payment Links/VA	Sales, Admin
+Receivables Intelligence (Placeholder)	Search only	receivables-intelligence, ardashboard	AR Dashboard, overdue tracking	Finance, CFO
+Outflow Controls (Placeholder)	Search only	outflow-controls, scheduledpayments	Scheduled payment delays	Admin, Checker
+Payables Intelligence (Placeholder)	Search only	payables-intelligence, optimalpaydate	Optimal payment timing	CFO, Finance
+Credit Backstop (Placeholder)	Search only	credit-backstop, odcc, overdraft	OD/CC payment fallback	CFO, Admin
+Sweep & Park (Placeholder)	Search only	sweep-park, autosweep	Auto-sweep idle balances	Finance, CFO
+Cash Locks (Placeholder)	Search only	cash-locks, nodebitwindows	No-debit protection windows	Admin, CFO
+3️⃣ ROLE-BASED DEMO PATHS
+🔵 ADMIN: System Control & Oversight (8-10 min)
+Objective: Demonstrate enterprise-grade governance, user management, and risk monitoring.
+
+Step	Action	What to Show
+1	Dashboard → Profile → Verify Admin role	Role badge in TopBar
+2	Command Search → admin-insight	Approval health metrics, user risk scores, workflow bottlenecks
+3	Admin Control Tower → Risk Dashboard	Fraud signals, anomaly detection, beneficiary risk flags
+4	Command Search → activity	Complete audit trail, filter by user/action type
+5	Command Search → usermanagement	User list, role matrix, permission inheritance
+6	User Management → Role Details (Maker)	Per-role transaction limits and permissions
+7	Command Search → limits	Role-based spending limits, escalation rules
+8	Limits Hub → Escalation Rules	Auto-routing logic (Maker → Checker → Approver → Admin)
+9	Command Search → beneficiarygovernance	Approval workflows, cooling periods, risk controls
+10	TopBar Bell → Notifications	System events, pending approvals requiring admin action
+11	Return to Dashboard	Summarize admin visibility across all users
+Key Talking Points:
+
+Admin has full visibility and control across all users and workflows
+Zero-trust architecture with configurable approval chains
+Complete immutable audit trail for compliance
+Risk-based routing and fraud prevention
+🟢 MAKER: Transaction Initiation (6-8 min)
+Objective: Demonstrate transaction creation and payment workflows.
+
+Step	Action	What to Show
+1	Dashboard	Account balance cards, quick actions
+2	DockGrid → Transactions → MFS	Provider selection (bKash, Nagad, Rocket, SureCash, Upay)
+3	MFS → Single Transfer	Amount entry, beneficiary selection, review before submit
+4	Back → Own Account Transfer	Single transfer form, bulk template option
+5	Command Search → beneficiary	Beneficiary list view
+6	Add Other Bank Beneficiary	Form with cooling period notice, approval requirement
+7	Command Search → bill	Utility categories (Electricity, Gas, WASA, Govt)
+8	Bill Payment → Electricity	Biller selection, account number entry
+9	Command Search → timeline	Upcoming scheduled payments, EMI calendar
+10	Command Search → reports → Statement	Date range selector, export format options
+11	Return to Dashboard	Show transaction quick actions
+Key Talking Points:
+
+Makers initiate all payment requests (never execute directly)
+Beneficiaries require approval before use (fraud prevention)
+All actions logged and subject to approval workflows
+Timeline provides visibility into upcoming obligations
+🟡 CHECKER: Verification & Approval (5-7 min)
+Objective: Demonstrate dual-control approval workflows.
+
+Step	Action	What to Show
+1	TopBar Bell → Notifications	Pending approval count
+2	DockGrid → Approvals → Queue	Pending tab, transaction list
+3	Filter by Transaction Type	Filter to "Transfer" only
+4	Select transaction → Approval Detail	Maker details, timestamp, amount, beneficiary
+5	Approval Detail → Approve	Approve button → Confirmation
+6	Return to Queue → History tab	Approved transactions with checker stamp
+7	Command Search → beneficiarygovernance	Pending beneficiary approvals
+8	Beneficiary Governance → Approve beneficiary	Cooling period enforcement, risk flag review
+9	Command Search → limits	Checker authority limits, escalation triggers
+10	Command Search → activity	Filter by Action = "APPROVE" → Personal approval history
+11	Return to Dashboard	Show cleared approval queue
+Key Talking Points:
+
+Checkers provide second-level verification (dual control)
+Authority limits prevent single-point-of-failure approvals
+Beneficiary governance prevents unauthorized payees
+Activity log creates forensic audit trail
+🟠 CFO / FINANCE: Strategic Intelligence (7-9 min)
+Objective: Demonstrate behavioral insights, cash intelligence, and CFO-grade decision support.
+
+Step	Action	What to Show
+1	Dashboard	Consolidated account view
+2	DockGrid → Insights Hub	Category organization (Cash Behavior, Risk, Operations)
+3	Insights Hub → Smart Alerts	Behavioral insights: runway warnings, unusual patterns, seasonal signals
+4	Back → Cash Intelligence	Cash runway projection, minimum safe balance, forecasting
+5	Command Search → account-control-tower	Multi-account consolidated view, liquidity fragmentation
+6	Command Search → cash-buckets	Mental accounting: Payroll, Tax, Vendor, Free Cash (visual only)
+7	Command Search → tax-vault	GST/TDS accumulation tracker, one-tap statutory payment
+8	Command Search → benefits-incentives	Privilege tiers, fee waivers, free payroll runs (balance discipline rewards)
+9	Command Search → receivables-intelligence	AR Dashboard (Placeholder), overdue tracking, auto-nudge
+10	Command Search → payables-intelligence	Optimal pay date calculator (Placeholder), penalty vs float
+11	Command Search → vam	Virtual account receivables tracking, client-wise collections
+12	Return to Dashboard	Summarize CFO intelligence ecosystem
+Key Talking Points:
+
+Cash OS features designed for CFO-grade strategic visibility
+Behavioral nudges without enforcing restrictions (CASA philosophy)
+Balance discipline rewarded through privileges (Feature 12: Benefits & Incentives)
+Non-interest CASA anchor: rewards > rates
+🟣 APPROVER: Escalation Authority (4-6 min)
+Objective: Demonstrate high-value transaction approval and escalation handling.
+
+Step	Action	What to Show
+1	Dashboard → Profile	Verify Approver role active
+2	DockGrid → Approvals → Queue	Filter by Amount > ৳10L
+3	Select high-value transaction	Escalation indicator (exceeded Checker limit)
+4	Approval Detail	Multi-level approval chain, authority escalation logic
+5	Approve transaction	Confirmation with approver stamp
+6	Command Search → limits → Escalation Rules	Auto-routing logic, per-role thresholds
+7	Command Search → beneficiaryrisk	Flagged beneficiaries requiring approver review
+8	Beneficiary Governance → Risk tab	Risk scores, cooling period enforcement
+9	Command Search → activity	Filter by Approver actions, high-value approval history
+10	Return to Dashboard	Show escalation notification cleared
+Key Talking Points:
+
+Approvers handle transactions exceeding Checker authority
+Escalation rules prevent bypass of approval chains
+Risk-based routing flags suspicious beneficiaries
+Multi-level approval protects high-value transactions
+⚪ VIEWER / AUDITOR: Read-Only Access (4-5 min)
+Objective: Demonstrate full transparency with zero modification rights.
+
+Step	Action	What to Show
+1	Dashboard	Account balances (read-only, no action buttons)
+2	Command Search → activity	Complete system activity across all users
+3	Activity Log → Filters	Date range, user role, action type filtering
+4	Command Search → reports → Account Summary	Transaction history, balance trends
+5	Reports → Generate Statement	Export capability for audit purposes
+6	Command Search → timeline	Scheduled payment calendar, EMI tracker
+7	Command Search → reconciliation	Matched/unmatched transaction summary
+8	Reconciliation → Exception Management	Unresolved reconciliation items
+9	Command Search → invoices	Outstanding receivables tracker, aging analysis
+10	Return to Dashboard	Confirm no action buttons visible
+Key Talking Points:
+
+Viewers have full transparency without modification rights
+Critical for audit, compliance, and forensic teams
+All data accessible for reporting and analysis
+Read-only access maintains data integrity
+4️⃣ COMMAND SEARCH MASTER CHEAT SHEET
+Press ⌘K (Mac) or Ctrl+K (Windows) anywhere to open Command Search.
+
+🔍 QUICK ACCESS BY CATEGORY
+TRANSACTIONS & PAYMENTS
+Type This	Get This
+mfs	MFS Transfer (bKash, Nagad, Rocket)
+bkash	MFS Transfer
+own	Own Account Transfer
+thirdparty	Third Party Transfer
+directdebit	Direct Debit Mandate
+bill	Bill Payment
+utility	Bill Payment
+APPROVALS & WORKFLOWS
+Type This	Get This
+approvals	Approval Queue
+approval	Approval Queue
+limits	Transaction Limits Hub
+escalation	Escalation Rules
+beneficiary	Beneficiary Management
+beneficiarygovernance	Beneficiary Governance Hub
+beneficiaryrisk	Beneficiary Risk Controls
+INTELLIGENCE & INSIGHTS
+Type This	Get This
+insights	Insights Hub
+smart-alerts	Smart Alerts (Behavioral)
+behavioral	Smart Alerts
+cfo insights	Smart Alerts
+cash-intelligence	Cash Intelligence (Runway)
+cashrunway	Cash Intelligence
+risk-dashboard	Risk Dashboard
+risk	Risk Dashboard
+admin-insight	Admin Control Tower
+admininsight	Admin Control Tower
+COLLECTIONS & RECEIVABLES
+Type This	Get This
+collections	Collections Hub
+vam	Virtual Account Management
+collect	Collect Money (Placeholder)
+banglaqr	Collect Money (Placeholder)
+paymentlinks	Collect Money (Placeholder)
+receivables-intelligence	Receivables Intelligence (Placeholder)
+ardashboard	Receivables Intelligence (Placeholder)
+RECONCILIATION & CASH OPS
+Type This	Get This
+recon	Reconciliation Dashboard
+reconciliation	Reconciliation Dashboard
+exceptions	Exception Management
+sweep-park	Sweep & Park (Placeholder)
+autosweep	Sweep & Park (Placeholder)
+cash-locks	Cash Locks (Placeholder)
+nodebitwindows	Cash Locks (Placeholder)
+ACCOUNTS & ALLOCATION
+Type This	Get This
+account-control-tower	Account Control Tower
+multiaccountview	Account Control Tower
+cash-buckets	Cash Buckets (Mental Accounting)
+mentalaccounting	Cash Buckets
+tax-vault	Tax Vault
+gstparking	Tax Vault
+tdsvault	Tax Vault
+REPORTING & AUDIT
+Type This	Get This
+reports	Reports Menu
+statement	Generate Statement
+invoice	Invoice Hub
+invoices	Invoice Hub
+timeline	Timeline View
+emi	Timeline View
+activity	Activity Log
+audit	Activity Log
+notifications	Notification Center
+ADMINISTRATION
+Type This	Get This
+settings	Settings Hub
+usermanagement	User Management
+users	User Management
+positivepay	Positive Pay
+cheque	Chequebook Inventory
+chequebook	Chequebook Inventory
+benefits-incentives	Benefits & Incentives
+PAYMENTS INTELLIGENCE (Placeholders)
+Type This	Get This
+outflow-controls	Outflow Controls (Placeholder)
+scheduledpayments	Outflow Controls (Placeholder)
+payables-intelligence	Payables Intelligence (Placeholder)
+optimalpaydate	Payables Intelligence (Placeholder)
+credit-backstop	Credit Backstop (Placeholder)
+odcc	Credit Backstop (Placeholder)
+overdraft	Credit Backstop (Placeholder)
+5️⃣ FEATURE PURPOSE GUIDE
+🏦 CORE BANKING OPERATIONS
+MFS Transfer
+Enables mobile financial service payments through Bangladesh's top providers (bKash, Nagad, Rocket, SureCash, Upay) for retail and vendor payments.
+
+Own Account Transfer
+Internal fund movement between business accounts for liquidity management, allocation, and fund positioning. Supports single and bulk transfers.
+
+Third Party Transfer
+External beneficiary payments with mandatory approval workflows, beneficiary governance, and fraud prevention controls.
+
+Direct Debit
+Automated recurring payment mandate setup for rent, utilities, subscriptions, insurance premiums with maker-checker control and mandate management.
+
+Bill Payment
+Utility bill payment workflows for electricity (DESCO, DPDC), gas (Titas, Jalalabad), WASA, and government payments with category-based organization.
+
+✅ CONTROL & GOVERNANCE
+Approval Queue
+Central hub for reviewing and approving pending transactions. Demonstrates dual-control maker-checker separation with role-based approval authority.
+
+Transaction Limits
+Role-based spending authority configuration. Defines per-user, per-role, and per-transaction-type limits to prevent unauthorized high-value payments.
+
+Escalation Rules
+Automatic transaction routing to higher authority when limits are exceeded. Configurable escalation chains (Maker → Checker → Approver → Admin).
+
+Beneficiary Governance
+Complete beneficiary lifecycle management with approval workflows, cooling periods, risk scoring, and fraud prevention controls.
+
+Activity Log
+Immutable audit trail of all user actions, approvals, and system events. Provides forensic-grade logging for compliance, security analysis, and dispute resolution.
+
+💡 INTELLIGENCE & INSIGHTS
+Smart Alerts (Behavioral Cash Insights)
+CFO-grade behavioral intelligence providing runway warnings, unusual pattern detection, seasonal signals, and cash behavior nudges. Read-only, non-restrictive intelligence.
+
+Cash Intelligence
+Cash runway projection, minimum safe balance calculation, seasonality analysis, and forecasting for strategic cash management and liquidity planning.
+
+Risk Dashboard
+Real-time fraud monitoring, anomaly detection, beneficiary risk scoring, suspicious activity flagging, and security event tracking.
+
+Admin Control Tower
+Enterprise oversight dashboard showing approval health metrics, user risk scores, system integrity checks, workflow bottlenecks, and control effectiveness.
+
+Timeline View
+Visual calendar of all scheduled payments, EMI obligations, bill due dates, and upcoming cash commitments for proactive cash flow planning.
+
+📊 RECEIVABLES & COLLECTIONS
+Virtual Account Management (VAM)
+Distributor receivables tracking using virtual account numbers for automatic payment tagging, client-wise collection monitoring, and receivables reconciliation.
+
+Collections Hub
+Central navigation for all collection-related features: VAM, direct debit collection mandates, and collection matching/reconciliation workflows.
+
+Invoice Hub
+GST invoice tracking, outstanding receivables aging, invoice-wise payment matching, and overdue customer analysis with drill-down capabilities.
+
+Receivables Intelligence (Placeholder)
+AR Dashboard with overdue customer tracking, auto-nudge triggers, receivable health scoring, and collection optimization recommendations.
+
+🔄 RECONCILIATION & CASH OPERATIONS
+Reconciliation Dashboard
+Automatic transaction matching engine with AI-based pattern recognition, exception management, manual matching for edge cases, and rule configuration.
+
+Exception Management
+Handles unmatched transactions, partial matches, amount discrepancies, and suspicious pattern detection during reconciliation processes.
+
+Auto-Reconciliation Rules
+Configures intelligent matching logic based on amount, date, reference patterns, client history, and confidence thresholds for automated reconciliation.
+
+Sweep & Park (Placeholder)
+Auto-sweep rules for idle balance optimization, reverse sweep triggers, liquidity pooling across accounts, and automated fund positioning.
+
+Cash Locks (Placeholder)
+No-debit window configuration for payroll protection, daily outflow caps, emergency cash preservation, and calendar-based withdrawal restrictions.
+
+💰 STRATEGIC CASH FEATURES
+Account Control Tower
+Consolidated multi-account view across all business banking relationships to visualize liquidity fragmentation, optimize fund placement, and manage cash concentration.
+
+Cash Buckets (Mental Accounting)
+Purpose-based cash allocation (Payroll, Tax, Vendor, Free Cash) as visual-only non-restrictive tool for disciplined cash management without enforcement.
+
+Tax Vault
+GST/TDS accumulation tracker with one-tap statutory payment workflow. Separates tax obligations from operating cash for clarity and compliance.
+
+Benefits & Incentives
+Non-interest CASA rewards program. Privilege tiers, fee waivers, free payroll runs earned through balance discipline. Anchor Feature 12 of BizPay Cash OS.
+
+💳 PAYMENTS INTELLIGENCE (Placeholders)
+Collect Money (Placeholder)
+Bangla QR code generation, payment links, virtual account creation, and T+0 settlement for inbound collections with multi-channel payment acceptance.
+
+Outflow Controls (Placeholder)
+Scheduled payment delays, maker-checker time windows, intentional friction for large outflows, and configurable hold periods for fraud prevention.
+
+Payables Intelligence (Placeholder)
+Optimal pay date calculator balancing early payment discounts vs. float benefit vs. late payment penalties for working capital optimization.
+
+Credit Backstop (Placeholder)
+OD/CC auto-utilization as temporary fallback when payment would breach safe cash floor. Protects cash discipline without blocking critical payments (NOT loan initiation).
+
+🛠️ SERVICES & ADMINISTRATION
+User Management
+User creation, role assignment, permission matrix configuration, and user lifecycle management for enterprise access control and segregation of duties.
+
+Positive Pay
+Cheque clearance safety mechanism requiring pre-authorization of cheque details (amount, date, payee) to prevent fraud and unauthorized cheque clearing.
+
+Chequebook Inventory
+Cheque leaf tracking, serial number management, usage monitoring, and inventory alerts for physical payment instrument control and audit compliance.
+
+Service Requests
+Central menu for all non-transaction banking services: chequebook requests, positive pay setup, token management, and statement requests.
+
+Notification Center
+Real-time feed of approval requests, system events, limit breaches, security alerts, and workflow notifications with priority categorization and filtering.
+
+6️⃣ EMERGENCY RECOVERY GUIDE
+🆘 IF YOU GET LOST DURING A DEMO
+Quick Recovery (30 seconds):
+
+Press ⌘K (Mac) or Ctrl+K (Windows)
+
+Type the feature name you remember
+Select from results
+You're back on track
+Click "Home" in DockGrid
+
+Returns immediately to Dashboard
+Resets navigation state
+Start fresh from known location
+Click "Back" button repeatedly
+
+Each click moves one screen backward
+Keep clicking until you reach Dashboard
+Then proceed from home
+Check TopBar Notification Bell
+
+See recent system activity
+Understand current context
+Resume from logical point
+📍 THREE ANCHOR SCREENS (System Explainers)
+If you need to explain BizPay in 5 minutes, show these 3 screens:
+
+Approval Queue (approvals)
+
+Demonstrates: Maker-checker separation, dual-control workflow, governance model
+Key Message: "No single person can move money alone"
+Smart Alerts (smart-alerts)
+
+Demonstrates: Behavioral intelligence, CFO-grade decision support, Cash OS philosophy
+Key Message: "Intelligence without restriction, nudges without enforcement"
+Activity Log (activity)
+
+Demonstrates: Complete audit trail, immutability, compliance architecture
+Key Message: "Every action is recorded, nothing can be erased"
+🔄 COMPLETE NAVIGATION RESET
+To fully reset your demo flow:
+
+Click "Home" in DockGrid → Returns to Dashboard
+Press Esc → Closes Command Search if open
+TopBar Bell → Dismiss all notifications → Clears notification state
+TopBar Profile → Verify active role → Confirm correct role context
+Start fresh from Dashboard → Begin new demo path
+🎯 FEATURE FINDER DECISION TREE
+Can't find a feature? Follow this logic:
+
+├─ Is it transaction-related?
+│  └─ DockGrid → Transactions → Select payment type
+│
+├─ Is it approval-related?
+│  └─ DockGrid → Approvals → Approval Queue
+│
+├─ Is it a report or statement?
+│  └─ DockGrid → Reports → Select report type
+│
+├─ Is it intelligence or insights?
+│  └─ DockGrid → Insights Hub → Browse categories
+│
+├─ Is it user or role management?
+│  └─ DockGrid → Services → Service Requests → Users
+│
+├─ Is it cash allocation or accounts?
+│  └─ DockGrid → Settings Hub → Browse options
+│
+└─ Still can't find it?
+   └─ Command Search (⌘K) → Type any keyword → Browse results
+7️⃣ DEMO SAFETY & DISCLAIMERS
+⚠️ CRITICAL CONTEXT FOR STAKEHOLDERS
+This is a Frontend Demonstration System
+
+All features use mock data for visual demonstration
+No real financial transactions are executed
+No backend infrastructure is connected
+Database operations are simulated in-memory only
+Session data resets on page refresh
+Approval Workflows are Simulated
+
+Approval actions update mock state only
+No actual transaction clearing occurs
+Maker-checker separation is visually demonstrated
+Dual-control logic is frontend-only validation
+No funds actually move
+Activity Logs are Mock Data
+
+Logs demonstrate audit trail architecture
+Entries are generated for demo purposes
+Immutability is conceptually shown, not backend-enforced
+Timestamps reflect demo session only
+No persistent storage
+Role-Based Access Control is Visual
+
+Role switching changes UI visibility only
+No server-side permission enforcement
+Limit checks are frontend validation only
+Security model is demonstrated, not implemented
+No actual authorization layer
+✅ WHAT THIS DEMO PROVES
+User Experience Design
+
+Complete navigation architecture across 70+ screens
+Role-based interface adaptation
+Search-first feature discovery
+Hub-and-spoke information architecture
+Consistent design system (glass morphism, film grain, rounded corners)
+Workflow Design
+
+Maker-checker separation patterns
+Escalation logic for limit breaches
+Beneficiary governance lifecycle
+Multi-level approval chains
+Audit trail architecture
+Intelligence Architecture
+
+Behavioral cash insights framework
+Risk signal detection patterns
+Reconciliation automation logic
+Cash allocation strategies
+CFO decision support tools
+Enterprise Feature Coverage
+
+Complete SME banking feature set
+Cash OS behavioral intelligence modules (13 CASA features)
+Governance and compliance workflows
+Strategic CFO decision support tools
+Mobile-first responsive design
+🎭 RECOMMENDED DEMO LANGUAGE
+Use this phrasing during stakeholder presentations:
+
+❌ Avoid	✅ Use Instead
+"This approves the transaction"	"This demonstrates how the approval workflow would function"
+"The system is monitoring in real-time"	"The system would detect this pattern and generate an alert"
+"The AI is analyzing your cash behavior"	"Users would see this behavioral insight on their dashboard"
+"These are the actual system logs"	"This shows the audit trail that would be generated"
+"This is reconciling your transactions"	"This demonstrates the reconciliation matching engine"
+"Your balance will be debited"	"In production, this would initiate a payment request"
+"This is approved"	"This simulates the approval being granted"
+🔒 DATA PRIVACY STATEMENT
+All data displayed in this demo is synthetic:
+
+Account numbers are fictional
+Transaction amounts are illustrative
+User names are placeholders
+Beneficiary details are mock data
+No personally identifiable information (PII) is used
+No real customer data is present
+This demo is designed for:
+
+Stakeholder presentations
+Product validation sessions
+User experience testing
+Feature walkthrough demonstrations
+Investment and partnership discussions
+Design system validation
+This demo is NOT suitable for:
+
+Production banking operations
+Real transaction processing
+Compliance testing with regulatory bodies
+Security penetration testing (no backend exists)
+Performance benchmarking (mock data only)
+📊 APPENDIX: FEATURE STATUS MATRIX
+Status	Count	Description
+Fully Implemented	58	Complete UI, all interactions functional, mock data integrated, navigation wired
+Placeholder (Specified)	13	Visual design complete, specification done, awaiting full implementation per CASA roadmap
+Not Implemented	2	CommandSearch entries exist but no screens (A-Challan, Pay Order)
+Total Screens	70+	Complete frontend demo coverage
+FULLY IMPLEMENTED SCREENS (58)
+Transactions (5)
+
+MFS Transfer, Own Account Transfer, Third Party Transfer, Direct Debit, Bill Payment
+Services (4)
+
+Positive Pay, Chequebook Inventory, Service Requests, User Management (+ sub-screens)
+Approvals (2)
+
+Approval Queue, Approval Detail
+Reconciliation (4)
+
+Dashboard, Exception Management, Manual Matching, Auto-Recon Rules
+Limits (4)
+
+Transaction Limits, Escalation Rules, Limit Breach History, Transaction Pre-Check
+Beneficiary (5)
+
+Manage Beneficiaries, Add BRAC, Add Other Bank, Positive Pay Beneficiary, Beneficiary Governance
+Reports (7)
+
+Generate Statement, Account Summary, Transaction/DD/PositivePay/Bill Reports, Invoice Hub (+ 4 sub-screens)
+Timeline (1)
+
+Timeline View
+Notifications (1)
+
+Notification Center
+Activity (1)
+
+Activity Log
+Collections (4)
+
+Collections Hub, VAM, Direct Debit Collection, Collection Matching
+Insights (9)
+
+Insights Hub, Smart Alerts, Cash Intelligence, Risk Dashboard, Admin Control Tower, Timeline View, Activity Log, VAM Intelligence, Reports & Reconciliation
+Settings (4)
+
+Settings Hub, Account Control Tower, Cash Buckets, Benefits & Incentives
+Dashboard (1)
+
+Home with tabs
+Additional (6)
+
+User List, Add User, Edit User, Role Details, Receivables Intelligence Screen, Multiple service sub-screens
+PLACEHOLDER SCREENS (13 - CASH OS)
+Collections (2)
+
+Collect Money (QR/Payment Links/VA)
+Receivables Intelligence (AR Dashboard)
+Payments (3)
+
+Outflow Controls (Scheduled payment delays)
+Payables Intelligence (Optimal pay date)
+Credit Backstop (OD/CC fallback)
+Reconcile (2)
+
+Sweep & Park (Auto-sweep rules)
+Cash Locks (No-debit windows)
+Accounts (2)
+
+Tax Vault (GST/TDS parking) [accessible via search]
+Cash Buckets [also in Settings]
+Additional (4)
+
+PlaceholderScreen component used by multiple features
+Consistent styling with BizPay design system
+Full specifications complete
+Implementation deferred per CASA roadmap
+NOT IMPLEMENTED (2)
+A-Challan (Government payments) - CommandSearch entry exists, no screen
+Pay Order (Issue PO) - CommandSearch entry exists, no screen
+🎯 DEMO QUICK REFERENCE CARD
+Print or screenshot this for live presentations:
+
+╔════════════════════════════════════════════════════════════╗
+║              BIZPAY DEMO QUICK REFERENCE                   ║
+╠════════════════════════════════════════════════════════════╣
+║                                                            ║
+║  🔍 UNIVERSAL SEARCH: ⌘K (Mac) / Ctrl+K (Windows)        ║
+║                                                            ║
+║  🏠 RESET TO HOME: Click "Home" in DockGrid               ║
+║                                                            ║
+║  🔔 CHECK ALERTS: TopBar → Bell Icon                      ║
+║                                                            ║
+║  👤 SWITCH ROLE: TopBar → Profile → Select Role          ║
+║                                                            ║
+║  📍 EMERGENCY ANCHOR SCREENS:                             ║
+║     • Type "approvals" → Shows governance                 ║
+║     • Type "smart-alerts" → Shows intelligence            ║
+║     • Type "activity" → Shows audit trail                 ║
+║                                                            ║
+║  🆘 IF LOST:                                              ║
+║     1. Press ⌘K (Ctrl+K)                                 ║
+║     2. Type feature name                                  ║
+║     3. Select from results                                ║
+║     4. You're back on track                               ║
+║                                                            ║
+║  ⚠️  REMEMBER:                                            ║
+║     • This is a FRONTEND DEMO using MOCK DATA             ║
+║     • No real transactions are executed                   ║
+║     • All approvals are simulated                         ║
+║     • Session resets on page refresh                      ║
+║                                                            ║
+╚════════════════════════════════════════════════════════════╝
+
+TOP 10 SEARCH SHORTCUTS:
+
+  approvals      → Approval Queue
+  smart-alerts   → Behavioral Intelligence
+  activity       → Audit Trail
+  vam            → Virtual Accounts
+  risk-dashboard → Fraud Monitoring
+  recon          → Reconciliation
+  limits         → Transaction Limits
+  cash-buckets   → Mental Accounting
+  timeline       → Payment Calendar
+  usermanagement → User/Role Admin
+
+COMMON DEMO FLOWS:
+
+  Maker Flow:     mfs → beneficiary → timeline
+  Checker Flow:   approvals → beneficiarygovernance → activity
+  Admin Flow:     admin-insight → risk-dashboard → usermanagement
+  CFO Flow:       smart-alerts → cash-intelligence → account-control-tower
+
+ROLE QUICK SWITCH:
+
+  TopBar → Profile → Select:
+  • Admin (full control)
+  • Maker (initiate only)
+  • Checker (verify & approve)
+  • Approver (high-value auth)
+  • Viewer (read-only)
+📝 DOCUMENT METADATA
+Version: 3.0
+Last Updated: February 18, 2026
+Document Type: Stakeholder Demo & Navigation Reference
+Maintained By: BizPay Product Architecture Team
+Next Review: March 2026 (Post-Sprint 15)
+Audit Status: Post-Comprehensive Dead Code Audit
+Total Coverage: 70+ screens, 14 modules, 13 placeholder features
+
+For questions during stakeholder presentations, refer to this guide or contact the product team.
+
+END OF GUIDE
