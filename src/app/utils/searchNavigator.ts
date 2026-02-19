@@ -275,6 +275,18 @@ export function searchNavigate(
       }, 150);
       break;
 
+    case "npsb":
+    case "interbanktransfer":
+    case "banktobank":
+      setActive("transaction");
+      setTimeout(() => {
+        console.log('🎯 Setting NPSB view, setter exists:', !!transactionSetterRef.current);
+        if (transactionSetterRef.current) {
+          transactionSetterRef.current("npsb");
+        }
+      }, 150);
+      break;
+
     // ===== SERVICES =====
     case "positivepay":
       setActive("service");

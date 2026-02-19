@@ -57,6 +57,7 @@ export default function CommandSearch({ open, onClose, onNavigate }: CommandSear
     { id: "own", label: "Own Account Transfer", sub: "Internal fund movement", group: "Transfers", iconKey: "creditCard" },
     { id: "thirdparty", label: "Third Party Transfer", sub: "Other account payments", group: "Transfers", iconKey: "creditCard" },
     { id: "directdebit", label: "Direct Debit", sub: "Auto-pay setup", group: "Transfers", iconKey: "creditCard" },
+    { id: "npsb", label: "NPSB Transfer", sub: "National Payment Switch, interbank transfer, bank to bank", group: "Transfers", iconKey: "creditCard" },
 
     // Collections
     { id: "collect", label: "Collect Money", sub: "Bangla QR, Payment Links, Virtual Accounts, T+0 Settlement", group: "Collections", iconKey: "activity" },

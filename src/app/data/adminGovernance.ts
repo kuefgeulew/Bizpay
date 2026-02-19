@@ -271,7 +271,7 @@ export const APPROVAL_RULES: ApprovalRule[] = [
 // ============================================
 
 export type LimitScope = "PER_TRANSACTION" | "DAILY" | "MONTHLY";
-export type TransactionCategory = "OWN_ACCOUNT" | "THIRD_PARTY" | "MFS" | "DIRECT_DEBIT" | "BILL_PAYMENT" | "BULK_PAYMENT";
+export type TransactionCategory = "OWN_ACCOUNT" | "THIRD_PARTY" | "MFS" | "DIRECT_DEBIT" | "BILL_PAYMENT" | "BULK_PAYMENT" | "NPSB_WITHIN_BBPLC" | "NPSB_OUTSIDE_BBPLC";
 
 export interface TransactionLimit {
   id: string;
@@ -294,13 +294,22 @@ export const ADMIN_TRANSACTION_LIMITS: TransactionLimit[] = [
   { id: "lim_004", role: "maker", category: "DIRECT_DEBIT", categoryLabel: "Direct Debit", perTransaction: 200000, daily: 1000000, monthly: 10000000, autoBlock: false, escalateOnBreach: true, lastModified: "2025-12-01T10:00:00Z" },
   { id: "lim_005", role: "maker", category: "BILL_PAYMENT", categoryLabel: "Bill Payment", perTransaction: 100000, daily: 500000, monthly: 2000000, autoBlock: false, escalateOnBreach: false, lastModified: "2025-12-20T09:00:00Z" },
   { id: "lim_006", role: "maker", category: "BULK_PAYMENT", categoryLabel: "Bulk Payment", perTransaction: 2000000, daily: 10000000, monthly: 100000000, autoBlock: true, escalateOnBreach: true, lastModified: "2026-01-05T11:00:00Z" },
+  // NPSB LIMITS — MAKER (mirrors Third Party)
+  { id: "lim_012", role: "maker", category: "NPSB_WITHIN_BBPLC", categoryLabel: "NPSB Within BBPLC", perTransaction: 500000, daily: 2000000, monthly: 20000000, autoBlock: true, escalateOnBreach: true, lastModified: "2026-02-19T10:00:00Z" },
+  { id: "lim_013", role: "maker", category: "NPSB_OUTSIDE_BBPLC", categoryLabel: "NPSB Outside BBPLC", perTransaction: 500000, daily: 2000000, monthly: 20000000, autoBlock: true, escalateOnBreach: true, lastModified: "2026-02-19T10:00:00Z" },
   // CHECKER LIMITS (view-only, no initiation)
   { id: "lim_007", role: "checker", category: "OWN_ACCOUNT", categoryLabel: "Own Account Transfer", perTransaction: 0, daily: 0, monthly: 0, autoBlock: true, escalateOnBreach: false, lastModified: "2025-12-01T10:00:00Z" },
   { id: "lim_008", role: "checker", category: "THIRD_PARTY", categoryLabel: "Third Party Transfer", perTransaction: 0, daily: 0, monthly: 0, autoBlock: true, escalateOnBreach: false, lastModified: "2025-12-01T10:00:00Z" },
+  // NPSB LIMITS — CHECKER (view-only, no initiation)
+  { id: "lim_016", role: "checker", category: "NPSB_WITHIN_BBPLC", categoryLabel: "NPSB Within BBPLC", perTransaction: 0, daily: 0, monthly: 0, autoBlock: true, escalateOnBreach: false, lastModified: "2026-02-19T10:00:00Z" },
+  { id: "lim_017", role: "checker", category: "NPSB_OUTSIDE_BBPLC", categoryLabel: "NPSB Outside BBPLC", perTransaction: 0, daily: 0, monthly: 0, autoBlock: true, escalateOnBreach: false, lastModified: "2026-02-19T10:00:00Z" },
   // APPROVER LIMITS
   { id: "lim_009", role: "approver", category: "OWN_ACCOUNT", categoryLabel: "Own Account Transfer", perTransaction: 5000000, daily: 20000000, monthly: 200000000, autoBlock: false, escalateOnBreach: true, lastModified: "2025-12-01T10:00:00Z" },
   { id: "lim_010", role: "approver", category: "THIRD_PARTY", categoryLabel: "Third Party Transfer", perTransaction: 2000000, daily: 10000000, monthly: 100000000, autoBlock: false, escalateOnBreach: true, lastModified: "2025-12-01T10:00:00Z" },
   { id: "lim_011", role: "approver", category: "BULK_PAYMENT", categoryLabel: "Bulk Payment", perTransaction: 10000000, daily: 50000000, monthly: 500000000, autoBlock: false, escalateOnBreach: true, lastModified: "2026-01-05T11:00:00Z" },
+  // NPSB LIMITS — APPROVER
+  { id: "lim_014", role: "approver", category: "NPSB_WITHIN_BBPLC", categoryLabel: "NPSB Within BBPLC", perTransaction: 2000000, daily: 10000000, monthly: 100000000, autoBlock: false, escalateOnBreach: true, lastModified: "2026-02-19T10:00:00Z" },
+  { id: "lim_015", role: "approver", category: "NPSB_OUTSIDE_BBPLC", categoryLabel: "NPSB Outside BBPLC", perTransaction: 2000000, daily: 10000000, monthly: 100000000, autoBlock: false, escalateOnBreach: true, lastModified: "2026-02-19T10:00:00Z" },
 ];
 
 // ============================================

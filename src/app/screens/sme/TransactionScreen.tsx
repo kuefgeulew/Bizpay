@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { ArrowLeft, ArrowRightLeft, Smartphone, Building2, Repeat, CreditCard, Zap, ChevronRight } from "lucide-react";
+import { ArrowLeft, ArrowRightLeft, Smartphone, Building2, Repeat, CreditCard, Zap, ChevronRight, Globe } from "lucide-react";
 import { motion } from "motion/react";
 import DirectDebitMenu from "./DirectDebitMenu";
 import MfsMenu from "./mfs/MfsMenu";
@@ -7,6 +7,7 @@ import OwnAccountTransferSingle from "./OwnAccountTransferSingle";
 import OwnAccountTransferBulk from "./OwnAccountTransferBulk";
 import BillPaymentMenu from "./billpayment/BillPaymentMenu";
 import ThirdPartyTransferScreen, { type ThirdPartyPrefill } from "./transfers/ThirdPartyTransferScreen";
+import NpsbMenu from "./transfers/npsb/NpsbMenu";
 import {
   QUICK_PAY_ENTRIES,
   getMethodLabel,
@@ -87,6 +88,9 @@ export default function TransactionScreen({ onBack, setTransactionView }: Transa
         />
       );
 
+    case "npsb":
+      return <NpsbMenu onBack={handleReturnToMenu} />;
+
     default:
       // Transaction Menu Hub
       return <TransactionMenuHub onBack={onBack} onSelect={setView} onQuickPay={handleQuickPay} />;
@@ -160,11 +164,11 @@ function TransactionMenuHub({
       color: "cyan"
     },
     {
-      id: "mfs",
-      icon: <Smartphone size={24} />,
-      title: "MFS Transfer",
-      description: "bKash, Nagad, Rocket, Upay",
-      color: "blue"
+      id: "thirdparty",
+      icon: <Building2 size={24} />,
+      title: "Third Party Transfer",
+      description: "Other bank payments",
+      color: "orange"
     },
     {
       id: "directdebit",
@@ -174,19 +178,26 @@ function TransactionMenuHub({
       color: "purple"
     },
     {
+      id: "npsb",
+      icon: <Globe size={24} />,
+      title: "NPSB Transfer",
+      description: "National Payment Switch Bangladesh",
+      color: "red"
+    },
+    {
+      id: "mfs",
+      icon: <Smartphone size={24} />,
+      title: "MFS Transfer",
+      description: "bKash, Nagad, Rocket, Upay",
+      color: "blue"
+    },
+    {
       id: "bill",
       icon: <CreditCard size={24} />,
       title: "Bill Payment",
       description: "Utilities & Government services",
       color: "green"
     },
-    {
-      id: "thirdparty",
-      icon: <Building2 size={24} />,
-      title: "Third Party Transfer",
-      description: "Other bank payments",
-      color: "orange"
-    }
   ];
 
   return (
