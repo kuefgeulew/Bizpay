@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import { ArrowLeft, AlertTriangle, Calendar, DollarSign } from "lucide-react";
+import { ArrowLeft, AlertTriangle, Calendar, Banknote, ArrowRight } from "lucide-react";
 import { motion } from "motion/react";
 import {
   BANK_TRANSACTIONS,
@@ -47,27 +47,45 @@ export default function ExceptionManagementScreen({
   }, [allExceptions]);
 
   return (
-    <div className="glass-page">
-      {/* Header */}
-      <header className="mb-6">
-        <button onClick={onBack} className="glass-back">
-          <ArrowLeft size={20} />
-          <span>Back</span>
-        </button>
+    <div className="relative h-full text-white px-6 pt-8 overflow-y-auto pb-24 font-sans">
+      {/* Film Grain */}
+      <div
+        className="fixed inset-0 opacity-[0.03] pointer-events-none z-50 mix-blend-overlay"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
+        }}
+      />
 
-        <h1 className="glass-title">Exception Management</h1>
-        
-        {/* Contextual Helper */}
-        <div className="mt-3 mb-4 px-4 py-3 bg-amber-50 border border-amber-200 rounded-xl">
-          <p className="text-sm text-amber-900 font-medium">
-            This screen displays unmatched transactions that require manual review, prioritized by severity and aging.
+      {/* Header */}
+      <header className="flex items-center gap-4 mb-8">
+        <button
+          onClick={onBack}
+          className="p-3 hover:bg-white/10 rounded-full border border-white/10 backdrop-blur-2xl transition-all active:scale-90"
+        >
+          <ArrowLeft size={20} />
+        </button>
+        <div>
+          <h1 className="text-3xl font-serif tracking-tight">Exceptions</h1>
+          <p className="text-[10px] uppercase tracking-[0.3em] text-cyan-400/80 font-bold mt-1">
+            {allExceptions.length} Items Need Attention
           </p>
         </div>
-        
-        <p className="text-sm text-muted-foreground">
-          {allExceptions.length} items require attention
-        </p>
       </header>
+
+      {/* Contextual Advisory */}
+      <motion.div
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={SPRING}
+        className="mb-6 p-4 rounded-[28px] bg-amber-500/5 border border-amber-500/20 backdrop-blur-[45px] shadow-[inset_0_1px_1px_rgba(255,255,255,0.08)]"
+      >
+        <div className="flex items-start gap-3">
+          <AlertTriangle size={16} className="text-amber-400 mt-0.5 shrink-0" />
+          <p className="text-[11px] text-white/70 leading-relaxed">
+            Unmatched transactions requiring manual review, prioritized by severity and aging.
+          </p>
+        </div>
+      </motion.div>
 
       {/* Severity Filter Pills */}
       <div className="flex gap-2 mb-6 overflow-x-auto pb-2">
@@ -76,7 +94,7 @@ export default function ExceptionManagementScreen({
           count={allExceptions.length}
           active={filter === "ALL"}
           onClick={() => setFilter("ALL")}
-          color="gray"
+          color="cyan"
         />
         <FilterPill
           label="Critical"
@@ -113,11 +131,12 @@ export default function ExceptionManagementScreen({
         {filteredExceptions.length === 0 ? (
           <EmptyState filter={filter} />
         ) : (
-          filteredExceptions.map((exception) => (
+          filteredExceptions.map((exception, i) => (
             <ExceptionCard
               key={exception.id}
               exception={exception}
               onResolve={() => onResolveException(exception.id)}
+              delay={0.05 * i}
             />
           ))
         )}
@@ -127,7 +146,7 @@ export default function ExceptionManagementScreen({
 }
 
 // ============================================
-// SUB-COMPONENTS
+// SUB-COMPONENTS — Gold Standard Design System
 // ============================================
 
 function FilterPill({
@@ -141,30 +160,30 @@ function FilterPill({
   count: number;
   active: boolean;
   onClick: () => void;
-  color: "gray" | "red" | "amber" | "blue" | "emerald";
+  color: "cyan" | "red" | "amber" | "blue" | "emerald";
 }) {
-  const colors = {
-    gray: active
-      ? "bg-gray-700 text-white"
-      : "bg-gray-100 text-gray-700 hover:bg-gray-200",
+  const colorMap = {
+    cyan: active
+      ? "bg-cyan-500/20 border-cyan-500/40 text-cyan-300"
+      : "bg-white/5 border-white/10 text-white/40 hover:text-white/60",
     red: active
-      ? "bg-red-600 text-white"
-      : "bg-red-50 text-red-700 hover:bg-red-100",
+      ? "bg-red-500/20 border-red-500/40 text-red-300"
+      : "bg-white/5 border-white/10 text-white/40 hover:text-white/60",
     amber: active
-      ? "bg-amber-600 text-white"
-      : "bg-amber-50 text-amber-700 hover:bg-amber-100",
+      ? "bg-amber-500/20 border-amber-500/40 text-amber-300"
+      : "bg-white/5 border-white/10 text-white/40 hover:text-white/60",
     blue: active
-      ? "bg-blue-600 text-white"
-      : "bg-blue-50 text-blue-700 hover:bg-blue-100",
+      ? "bg-blue-500/20 border-blue-500/40 text-blue-300"
+      : "bg-white/5 border-white/10 text-white/40 hover:text-white/60",
     emerald: active
-      ? "bg-emerald-600 text-white"
-      : "bg-emerald-50 text-emerald-700 hover:bg-emerald-100",
+      ? "bg-emerald-500/20 border-emerald-500/40 text-emerald-300"
+      : "bg-white/5 border-white/10 text-white/40 hover:text-white/60",
   };
 
   return (
     <button
       onClick={onClick}
-      className={`px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap transition-colors ${colors[color]}`}
+      className={`px-3 py-1.5 rounded-full text-[10px] uppercase tracking-[0.15em] font-bold border whitespace-nowrap transition-all ${colorMap[color]}`}
     >
       {label} ({count})
     </button>
@@ -174,9 +193,11 @@ function FilterPill({
 function ExceptionCard({
   exception,
   onResolve,
+  delay,
 }: {
   exception: ReconciliationException;
   onResolve: () => void;
+  delay: number;
 }) {
   // Get transaction details
   const transaction =
@@ -186,78 +207,88 @@ function ExceptionCard({
 
   if (!transaction) return null;
 
-  const severityColors = {
-    LOW: "border-emerald-200 bg-emerald-50",
-    MEDIUM: "border-blue-200 bg-blue-50",
-    HIGH: "border-amber-200 bg-amber-50",
-    CRITICAL: "border-red-200 bg-red-50",
+  const severityConfig = {
+    LOW: {
+      border: "border-emerald-500/20",
+      bg: "bg-emerald-500/5",
+      iconColor: "text-emerald-400",
+      badgeBg: "bg-emerald-500/15",
+      badgeText: "text-emerald-300",
+      badgeBorder: "border-emerald-500/30",
+    },
+    MEDIUM: {
+      border: "border-blue-500/20",
+      bg: "bg-blue-500/5",
+      iconColor: "text-blue-400",
+      badgeBg: "bg-blue-500/15",
+      badgeText: "text-blue-300",
+      badgeBorder: "border-blue-500/30",
+    },
+    HIGH: {
+      border: "border-amber-500/20",
+      bg: "bg-amber-500/5",
+      iconColor: "text-amber-400",
+      badgeBg: "bg-amber-500/15",
+      badgeText: "text-amber-300",
+      badgeBorder: "border-amber-500/30",
+    },
+    CRITICAL: {
+      border: "border-red-500/20",
+      bg: "bg-red-500/5",
+      iconColor: "text-red-400",
+      badgeBg: "bg-red-500/15",
+      badgeText: "text-red-300",
+      badgeBorder: "border-red-500/30",
+    },
   };
 
-  const severityBadgeColors = {
-    LOW: "bg-emerald-100 text-emerald-700",
-    MEDIUM: "bg-blue-100 text-blue-700",
-    HIGH: "bg-amber-100 text-amber-700",
-    CRITICAL: "bg-red-100 text-red-700",
-  };
+  const cfg = severityConfig[exception.severity];
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={SPRING}
-      className={`p-4 rounded-xl border ${
-        severityColors[exception.severity]
-      }`}
+      initial={{ opacity: 0, x: -15 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ ...SPRING, delay }}
+      className={`p-4 rounded-[28px] ${cfg.bg} ${cfg.border} border backdrop-blur-[45px] shadow-[inset_0_1px_1px_rgba(255,255,255,0.08)]`}
     >
-      {/* Header */}
+      {/* Header Row */}
       <div className="flex items-start justify-between mb-3">
-        <div className="flex-1">
-          <div className="flex items-center gap-2 mb-1">
-            <AlertTriangle
-              size={16}
-              className={
-                exception.severity === "CRITICAL"
-                  ? "text-red-600"
-                  : exception.severity === "HIGH"
-                  ? "text-amber-600"
-                  : "text-blue-600"
-              }
-            />
-            <span className="text-xs font-semibold text-muted-foreground uppercase">
+        <div className="flex-1 min-w-0">
+          <div className="flex items-center gap-2 mb-1.5">
+            <AlertTriangle size={14} className={cfg.iconColor} />
+            <span className="text-[9px] uppercase tracking-[0.2em] text-white/40 font-bold">
               {exception.exceptionType.replace("_", " ")}
             </span>
           </div>
-          <p className="text-sm font-medium text-foreground line-clamp-2">
+          <p className="text-sm text-white/90 line-clamp-2">
             {transaction.description}
           </p>
         </div>
 
         <span
-          className={`px-2 py-1 text-[10px] font-bold rounded-full ${
-            severityBadgeColors[exception.severity]
-          }`}
+          className={`px-2 py-0.5 rounded-full text-[9px] uppercase tracking-[0.15em] font-bold shrink-0 ml-2 ${cfg.badgeBg} ${cfg.badgeText} border ${cfg.badgeBorder}`}
         >
           {exception.severity}
         </span>
       </div>
 
-      {/* Details */}
+      {/* Details Row */}
       <div className="grid grid-cols-2 gap-3 mb-3">
         <div className="flex items-center gap-2">
-          <DollarSign size={14} className="text-muted-foreground" />
+          <Banknote size={13} className="text-white/30" />
           <div>
-            <p className="text-xs text-muted-foreground">Amount</p>
-            <p className="text-sm font-bold text-foreground">
+            <p className="text-[9px] text-white/40 uppercase tracking-wider">Amount</p>
+            <p className="text-sm text-white font-serif">
               {formatAmount(exception.amount)}
             </p>
           </div>
         </div>
 
         <div className="flex items-center gap-2">
-          <Calendar size={14} className="text-muted-foreground" />
+          <Calendar size={13} className="text-white/30" />
           <div>
-            <p className="text-xs text-muted-foreground">Age</p>
-            <p className="text-sm font-bold text-foreground">
+            <p className="text-[9px] text-white/40 uppercase tracking-wider">Age</p>
+            <p className="text-sm text-white font-serif">
               {exception.ageDays} days
             </p>
           </div>
@@ -267,10 +298,10 @@ function ExceptionCard({
       {/* Source Badge */}
       <div className="mb-3">
         <span
-          className={`text-xs px-2 py-1 rounded-full font-semibold ${
+          className={`text-[9px] px-2 py-0.5 rounded-full font-bold uppercase tracking-[0.15em] border ${
             exception.transactionSource === "BANK"
-              ? "bg-blue-100 text-blue-700"
-              : "bg-purple-100 text-purple-700"
+              ? "bg-cyan-500/10 text-cyan-300 border-cyan-500/20"
+              : "bg-purple-500/10 text-purple-300 border-purple-500/20"
           }`}
         >
           Source: {exception.transactionSource}
@@ -282,15 +313,16 @@ function ExceptionCard({
         <motion.button
           whileTap={{ scale: 0.97 }}
           onClick={onResolve}
-          className="flex-1 py-2 px-3 rounded-lg bg-primary text-primary-foreground text-xs font-semibold hover:opacity-90 transition-opacity"
+          className="flex-1 py-2.5 px-3 rounded-[20px] bg-cyan-500/10 border border-cyan-500/30 text-[11px] text-cyan-300 font-semibold hover:bg-cyan-500/20 transition-all flex items-center justify-center gap-2"
         >
           Resolve Manually
+          <ArrowRight size={12} />
         </motion.button>
         <motion.button
           whileTap={{ scale: 0.97 }}
-          className="px-3 py-2 rounded-lg bg-muted text-foreground text-xs font-semibold hover:bg-muted/80 transition-colors"
+          className="px-4 py-2.5 rounded-[20px] bg-white/5 border border-white/10 text-[11px] text-white/60 font-semibold hover:bg-white/10 transition-all"
         >
-          View Details
+          Details
         </motion.button>
       </div>
     </motion.div>
@@ -299,13 +331,20 @@ function ExceptionCard({
 
 function EmptyState({ filter }: { filter: FilterType }) {
   return (
-    <div className="glass-card !flex-col !items-center !justify-center !py-12 !cursor-default">
-      <div className="text-4xl mb-3">✅</div>
-      <p className="text-muted-foreground text-sm">
+    <motion.div
+      initial={{ opacity: 0, y: 12 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={SPRING}
+      className="py-12 flex flex-col items-center justify-center rounded-[28px] bg-white/5 border border-white/10 backdrop-blur-[45px] shadow-[inset_0_1px_1px_rgba(255,255,255,0.08)]"
+    >
+      <div className="w-12 h-12 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center mb-4">
+        <AlertTriangle size={20} className="text-emerald-400" />
+      </div>
+      <p className="text-sm text-white/40">
         {filter === "ALL"
           ? "No exceptions found"
           : `No ${filter.toLowerCase()} severity exceptions`}
       </p>
-    </div>
+    </motion.div>
   );
 }

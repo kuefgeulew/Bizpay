@@ -1,6 +1,6 @@
 import { useState, useMemo } from "react";
-import { ArrowLeft, Link2, CheckCircle } from "lucide-react";
-import { motion } from "motion/react";
+import { ArrowLeft, Link2, CheckCircle, ArrowRight, AlertTriangle, Banknote } from "lucide-react";
+import { motion, AnimatePresence } from "motion/react";
 import { toast } from "sonner";
 import {
   BANK_TRANSACTIONS,
@@ -109,7 +109,7 @@ export default function ManualMatchingScreen({
         selectedBankTotal
       );
 
-      console.log("✅ Manual match submitted for approval:", approval);
+      console.log("Manual match submitted for approval:", approval);
 
       toast.success("Match Submitted for Approval", {
         description: "Awaiting Checker verification",
@@ -131,68 +131,98 @@ export default function ManualMatchingScreen({
   };
 
   return (
-    <div className="glass-page">
-      {/* Header */}
-      <header className="mb-6">
-        <button onClick={onBack} className="glass-back">
-          <ArrowLeft size={20} />
-          <span>Back</span>
-        </button>
+    <div className="relative h-full text-white px-6 pt-8 overflow-y-auto pb-24 font-sans">
+      {/* Film Grain */}
+      <div
+        className="fixed inset-0 opacity-[0.03] pointer-events-none z-50 mix-blend-overlay"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
+        }}
+      />
 
-        <h1 className="glass-title">Manual Matching</h1>
-        <p className="text-sm text-muted-foreground -mt-4">
-          Select transactions to match
-        </p>
+      {/* Header */}
+      <header className="flex items-center gap-4 mb-8">
+        <button
+          onClick={onBack}
+          className="p-3 hover:bg-white/10 rounded-full border border-white/10 backdrop-blur-2xl transition-all active:scale-90"
+        >
+          <ArrowLeft size={20} />
+        </button>
+        <div>
+          <h1 className="text-3xl font-serif tracking-tight">Manual Matching</h1>
+          <p className="text-[10px] uppercase tracking-[0.3em] text-cyan-400/80 font-bold mt-1">
+            Select Transactions to Match
+          </p>
+        </div>
       </header>
 
       {/* Selection Summary */}
-      {(selectedBankTxns.length > 0 || selectedLedgerEntries.length > 0) && (
-        <div className="mb-6 p-4 rounded-xl bg-blue-50 border border-blue-200">
-          <div className="grid grid-cols-2 gap-4 mb-3">
-            <div>
-              <p className="text-xs text-blue-700 font-medium mb-1">
-                Bank Selected
-              </p>
-              <p className="text-lg font-bold text-blue-900">
-                {formatAmount(selectedBankTotal)}
-              </p>
-              <p className="text-xs text-blue-700">
-                {selectedBankTxns.length} transaction(s)
-              </p>
+      <AnimatePresence>
+        {(selectedBankTxns.length > 0 || selectedLedgerEntries.length > 0) && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={SPRING}
+            className="mb-6 p-5 rounded-[28px] bg-cyan-500/5 border border-cyan-500/20 backdrop-blur-[45px] shadow-[inset_0_1px_1px_rgba(255,255,255,0.08)]"
+          >
+            <p className="text-[10px] uppercase tracking-[0.25em] text-cyan-400/80 font-bold mb-4">
+              Selection Summary
+            </p>
+            <div className="grid grid-cols-2 gap-4 mb-3">
+              <div>
+                <p className="text-[9px] text-white/40 uppercase tracking-wider mb-1">
+                  Bank Selected
+                </p>
+                <p className="text-xl text-white font-serif">
+                  {formatAmount(selectedBankTotal)}
+                </p>
+                <p className="text-[10px] text-cyan-400/60 mt-0.5">
+                  {selectedBankTxns.length} transaction(s)
+                </p>
+              </div>
+              <div>
+                <p className="text-[9px] text-white/40 uppercase tracking-wider mb-1">
+                  Ledger Selected
+                </p>
+                <p className="text-xl text-white font-serif">
+                  {formatAmount(selectedLedgerTotal)}
+                </p>
+                <p className="text-[10px] text-purple-400/60 mt-0.5">
+                  {selectedLedgerEntries.length} entry(s)
+                </p>
+              </div>
             </div>
-            <div>
-              <p className="text-xs text-blue-700 font-medium mb-1">
-                Ledger Selected
-              </p>
-              <p className="text-lg font-bold text-blue-900">
-                {formatAmount(selectedLedgerTotal)}
-              </p>
-              <p className="text-xs text-blue-700">
-                {selectedLedgerEntries.length} entry(s)
-              </p>
-            </div>
-          </div>
 
-          {amountDifference > 0 && (
-            <div className="flex items-center justify-between p-2 rounded-lg bg-amber-100">
-              <span className="text-xs font-semibold text-amber-900">
-                Amount Difference
-              </span>
-              <span className="text-xs font-bold text-amber-900">
-                {formatAmount(amountDifference)}
-              </span>
-            </div>
-          )}
-        </div>
-      )}
+            {amountDifference > 0 && (
+              <div className="flex items-center justify-between p-3 rounded-[20px] bg-amber-500/5 border border-amber-500/20">
+                <div className="flex items-center gap-2">
+                  <AlertTriangle size={13} className="text-amber-400" />
+                  <span className="text-[10px] text-amber-300 font-semibold uppercase tracking-wider">
+                    Amount Difference
+                  </span>
+                </div>
+                <span className="text-sm text-amber-300 font-serif">
+                  {formatAmount(amountDifference)}
+                </span>
+              </div>
+            )}
+          </motion.div>
+        )}
+      </AnimatePresence>
 
-      {/* Bank Transactions */}
-      <div className="mb-6">
-        <h3 className="text-sm font-semibold text-foreground mb-3">
+      {/* Bank Transactions Section */}
+      <motion.div
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={SPRING}
+        className="mb-6"
+      >
+        <p className="text-[10px] uppercase tracking-[0.25em] text-cyan-400/80 font-bold mb-3">
           Bank Transactions ({unmatchedBank.length} unmatched)
-        </h3>
+        </p>
         <div className="space-y-2">
-          {unmatchedBank.map((txn) => (
+          {unmatchedBank.map((txn, i) => (
             <SelectableTransactionCard
               key={txn.id}
               id={txn.id}
@@ -202,19 +232,25 @@ export default function ManualMatchingScreen({
               reference={txn.reference}
               selected={selectedBankTxns.includes(txn.id)}
               onSelect={handleBankSelect}
-              color="blue"
+              color="cyan"
+              delay={0.02 * i}
             />
           ))}
         </div>
-      </div>
+      </motion.div>
 
-      {/* Ledger Entries */}
-      <div className="mb-6">
-        <h3 className="text-sm font-semibold text-foreground mb-3">
+      {/* Ledger Entries Section */}
+      <motion.div
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ ...SPRING, delay: 0.1 }}
+        className="mb-6"
+      >
+        <p className="text-[10px] uppercase tracking-[0.25em] text-purple-400/80 font-bold mb-3">
           Ledger Entries ({unmatchedLedger.length} unmatched)
-        </h3>
+        </p>
         <div className="space-y-2">
-          {unmatchedLedger.map((entry) => (
+          {unmatchedLedger.map((entry, i) => (
             <SelectableTransactionCard
               key={entry.id}
               id={entry.id}
@@ -225,60 +261,76 @@ export default function ManualMatchingScreen({
               selected={selectedLedgerEntries.includes(entry.id)}
               onSelect={handleLedgerSelect}
               color="purple"
+              delay={0.02 * i}
             />
           ))}
         </div>
-      </div>
+      </motion.div>
 
       {/* Match Reason */}
-      {(selectedBankTxns.length > 0 || selectedLedgerEntries.length > 0) && (
-        <div className="mb-6">
-          <label className="text-sm font-semibold text-foreground mb-2 block">
-            Match Reason <span className="text-destructive">*</span>
-          </label>
-          <textarea
-            value={matchReason}
-            onChange={(e) => setMatchReason(e.target.value)}
-            placeholder="Explain why these transactions should be matched (min 10 characters)..."
-            rows={3}
-            className="field resize-none"
-          />
-          <p className="text-xs text-muted-foreground mt-1">
-            {matchReason.length} / 10 characters minimum
-          </p>
-        </div>
-      )}
+      <AnimatePresence>
+        {(selectedBankTxns.length > 0 || selectedLedgerEntries.length > 0) && (
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 12 }}
+            transition={SPRING}
+            className="mb-6 p-5 rounded-[28px] bg-white/5 border border-white/10 backdrop-blur-[45px] shadow-[inset_0_1px_1px_rgba(255,255,255,0.08)]"
+          >
+            <label className="text-[10px] uppercase tracking-[0.25em] text-cyan-400/80 font-bold block mb-3">
+              Match Reason <span className="text-red-400">*</span>
+            </label>
+            <textarea
+              value={matchReason}
+              onChange={(e) => setMatchReason(e.target.value)}
+              placeholder="Explain why these transactions should be matched (min 10 characters)..."
+              rows={3}
+              className="w-full p-3 rounded-xl bg-white/5 border border-white/10 text-white text-sm outline-none focus:border-cyan-500/40 transition-colors resize-none placeholder:text-white/20"
+            />
+            <p className="text-[9px] text-white/30 mt-1.5">
+              {matchReason.length} / 10 characters minimum
+            </p>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Submit Button */}
-      {canSubmit && (
-        <motion.button
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          whileTap={{ scale: 0.97 }}
-          onClick={() => setShowConfirmDialog(true)}
-          className="w-full py-3.5 rounded-xl bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-opacity flex items-center justify-center gap-2"
-        >
-          <Link2 size={18} />
-          Submit Match for Approval
-        </motion.button>
-      )}
+      <AnimatePresence>
+        {canSubmit && (
+          <motion.button
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 20 }}
+            whileTap={{ scale: 0.97 }}
+            onClick={() => setShowConfirmDialog(true)}
+            className="w-full p-4 rounded-[28px] bg-cyan-500/10 border border-cyan-500/30 backdrop-blur-[45px] shadow-[inset_0_1px_1px_rgba(255,255,255,0.1)] flex items-center justify-center gap-3 hover:bg-cyan-500/20 transition-all"
+          >
+            <Link2 size={16} className="text-cyan-400" />
+            <span className="text-sm text-cyan-300 font-semibold">
+              Submit Match for Approval
+            </span>
+          </motion.button>
+        )}
+      </AnimatePresence>
 
-      {/* Confirmation Dialog */}
-      {showConfirmDialog && (
-        <ConfirmationDialog
-          bankCount={selectedBankTxns.length}
-          ledgerCount={selectedLedgerEntries.length}
-          amountDifference={amountDifference}
-          onConfirm={handleSubmitMatch}
-          onCancel={() => setShowConfirmDialog(false)}
-        />
-      )}
+      {/* Confirmation Dialog — phone-contained */}
+      <AnimatePresence>
+        {showConfirmDialog && (
+          <ConfirmationDialog
+            bankCount={selectedBankTxns.length}
+            ledgerCount={selectedLedgerEntries.length}
+            amountDifference={amountDifference}
+            onConfirm={handleSubmitMatch}
+            onCancel={() => setShowConfirmDialog(false)}
+          />
+        )}
+      </AnimatePresence>
     </div>
   );
 }
 
 // ============================================
-// SUB-COMPONENTS
+// SUB-COMPONENTS — Gold Standard Design System
 // ============================================
 
 function SelectableTransactionCard({
@@ -290,6 +342,7 @@ function SelectableTransactionCard({
   selected,
   onSelect,
   color,
+  delay,
 }: {
   id: string;
   description: string;
@@ -298,36 +351,45 @@ function SelectableTransactionCard({
   reference: string;
   selected: boolean;
   onSelect: (id: string) => void;
-  color: "blue" | "purple";
+  color: "cyan" | "purple";
+  delay: number;
 }) {
-  const colors = {
-    blue: selected
-      ? "bg-blue-100 border-blue-400"
-      : "bg-white border-blue-200 hover:border-blue-300",
+  const colorStyles = {
+    cyan: selected
+      ? "bg-cyan-500/10 border-cyan-500/40 shadow-[inset_0_1px_1px_rgba(255,255,255,0.1)]"
+      : "bg-white/[0.03] border-white/10 hover:bg-white/5 shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)]",
     purple: selected
-      ? "bg-purple-100 border-purple-400"
-      : "bg-white border-purple-200 hover:border-purple-300",
+      ? "bg-purple-500/10 border-purple-500/40 shadow-[inset_0_1px_1px_rgba(255,255,255,0.1)]"
+      : "bg-white/[0.03] border-white/10 hover:bg-white/5 shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)]",
   };
 
   return (
     <motion.button
+      initial={{ opacity: 0, x: -10 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ ...SPRING, delay }}
       whileTap={{ scale: 0.98 }}
       onClick={() => onSelect(id)}
-      className={`w-full p-3 rounded-lg border-2 transition-colors text-left ${colors[color]}`}
+      className={`w-full p-3.5 rounded-[20px] border-2 backdrop-blur-[45px] transition-all text-left ${colorStyles[color]}`}
     >
       <div className="flex items-start justify-between mb-2">
-        <p className="text-sm font-medium text-foreground flex-1 line-clamp-2">
+        <p className="text-[12px] text-white/90 flex-1 line-clamp-2">
           {description}
         </p>
-        {selected && <CheckCircle size={16} className="text-primary shrink-0 ml-2" />}
+        {selected && (
+          <CheckCircle
+            size={16}
+            className={`shrink-0 ml-2 ${color === "cyan" ? "text-cyan-400" : "text-purple-400"}`}
+          />
+        )}
       </div>
 
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <span className="text-xs text-muted-foreground">{formatDate(date)}</span>
-          <span className="text-xs text-muted-foreground">{reference}</span>
+          <span className="text-[10px] text-white/30">{formatDate(date)}</span>
+          <span className="text-[10px] text-white/30 font-mono">{reference}</span>
         </div>
-        <span className="text-sm font-bold text-foreground">
+        <span className="text-sm text-white font-serif">
           {formatAmount(amount)}
         </span>
       </div>
@@ -352,48 +414,64 @@ function ConfirmationDialog({
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+      exit={{ opacity: 0 }}
+      className="absolute inset-0 bg-[#001E3C]/60 backdrop-blur-xl z-[100] flex items-center justify-center p-6"
       onClick={onCancel}
     >
       <motion.div
         initial={{ scale: 0.9, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
+        exit={{ scale: 0.9, opacity: 0 }}
         transition={SPRING}
         onClick={(e) => e.stopPropagation()}
-        className="bg-card rounded-2xl p-6 max-w-md w-full shadow-2xl"
+        className="w-full rounded-[28px] bg-[#0F172A] border border-white/10 p-6 shadow-2xl shadow-black/40"
       >
-        <h3 className="text-lg font-semibold text-foreground mb-3">
+        <h3 className="text-xl font-serif text-white mb-1">
           Confirm Manual Match
         </h3>
+        <p className="text-[10px] uppercase tracking-[0.25em] text-cyan-400/60 font-bold mb-5">
+          Review Before Submission
+        </p>
 
-        <div className="mb-6 space-y-2">
-          <p className="text-sm text-muted-foreground">
+        <div className="mb-5 space-y-2.5">
+          <p className="text-[11px] text-white/60">
             You are about to submit a manual match:
           </p>
-          <ul className="text-sm text-foreground space-y-1 ml-4 list-disc">
-            <li>{bankCount} bank transaction(s)</li>
-            <li>{ledgerCount} ledger entry(s)</li>
+          <div className="space-y-2 pl-1">
+            <div className="flex items-center gap-2">
+              <div className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
+              <p className="text-[11px] text-white/80">{bankCount} bank transaction(s)</p>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-1.5 h-1.5 rounded-full bg-purple-400" />
+              <p className="text-[11px] text-white/80">{ledgerCount} ledger entry(s)</p>
+            </div>
             {amountDifference > 0 && (
-              <li className="text-amber-700 font-medium">
-                Amount difference: {formatAmount(amountDifference)}
-              </li>
+              <div className="flex items-center gap-2">
+                <div className="w-1.5 h-1.5 rounded-full bg-amber-400" />
+                <p className="text-[11px] text-amber-300">
+                  Amount difference: {formatAmount(amountDifference)}
+                </p>
+              </div>
             )}
-          </ul>
-          <p className="text-sm text-muted-foreground mt-3">
-            This match will require Checker verification and Approver approval.
-          </p>
+          </div>
+          <div className="p-3 rounded-xl bg-white/[0.03] border border-white/5 mt-3">
+            <p className="text-[10px] text-white/40">
+              This match will require Checker verification and Approver approval.
+            </p>
+          </div>
         </div>
 
         <div className="flex gap-3">
           <button
             onClick={onCancel}
-            className="flex-1 py-2.5 rounded-xl bg-accent text-accent-foreground font-medium hover:bg-accent/80 transition-colors"
+            className="flex-1 py-3 rounded-[20px] bg-white/5 border border-white/10 text-[11px] text-white/60 font-semibold hover:bg-white/10 transition-all"
           >
             Cancel
           </button>
           <button
             onClick={onConfirm}
-            className="flex-1 py-2.5 rounded-xl bg-primary text-primary-foreground font-medium hover:opacity-90 transition-opacity"
+            className="flex-1 py-3 rounded-[20px] bg-cyan-500/10 border border-cyan-500/30 text-[11px] text-cyan-300 font-semibold hover:bg-cyan-500/20 transition-all"
           >
             Submit for Approval
           </button>
